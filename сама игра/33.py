@@ -1,25 +1,30 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-import random, sys
+import random
+import sys
 
 class Ui_MainWindow(object):
+    '''настройки оформления'''
     def setupUi(self, MainWindow):
+
         '''настройки шрифта главного'''
         font = QtGui.QFont()
         font.setFamily("Century Gothic")
         font.setBold(False)
         font.setWeight(50)
         font.setKerning(False)
+
         '''настройки окна'''
         MainWindow.setFont(font)
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1080, 800)
-        MainWindow.setWindowTitle("Грустный песик")
+        MainWindow.setWindowTitle("Спаси песика!")
         MainWindow.setWindowOpacity(1.0)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         '''настройки спец штук'''
         self.wordstat = QtWidgets.QLabel(self.centralwidget)
         self.wordstat.setGeometry(QtCore.QRect(245, 170, 600, 70))
@@ -38,7 +43,6 @@ class Ui_MainWindow(object):
         self.helps.setGeometry(QtCore.QRect(480, 670, 111, 31))
         font.setPointSize(15)
         self.helps.setFont(font)
-        #self.helps.setStyleSheet("background-image: url(:/bck/grass.jpg);")
         self.helps.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.helps.setFrameShadow(QtWidgets.QFrame.Plain)
         self.helps.setAlignment(QtCore.Qt.AlignCenter)
@@ -47,38 +51,32 @@ class Ui_MainWindow(object):
         self.tryletter.setGeometry(QtCore.QRect(480, 700, 251, 41))
         font.setPointSize(18)
         self.tryletter.setFont(font)
-        #self.tryletter.setStyleSheet("background-image: url(:/bck/grass.jpg);")
         self.tryletter.setFlat(True)
         self.tryletter.setObjectName("tryletter")
         self.numstr1 = QtWidgets.QPushButton(self.centralwidget)
         self.numstr1.setGeometry(QtCore.QRect(250, 750, 181, 41))
         self.numstr1.setFont(font)
-        #self.numstr1.setStyleSheet("background-image: url(:/bck/grass.jpg)")
         self.numstr1.setFlat(True)
         self.numstr1.setObjectName("numstr1")
         self.numstr2 = QtWidgets.QPushButton(self.centralwidget)
         self.numstr2.setGeometry(QtCore.QRect(450, 750, 181, 41))
         self.numstr2.setFont(font)
-        #self.numstr2.setStyleSheet("background-image: url(:/bck/grass.jpg)")
         self.numstr2.setFlat(True)
         self.numstr2.setObjectName("numstr2")
         self.numstr3 = QtWidgets.QPushButton(self.centralwidget)
         self.numstr3.setGeometry(QtCore.QRect(650, 750, 181, 41))
         self.numstr3.setFont(font)
-        #self.numstr3.setStyleSheet("background-image: url(:/bck/grass.jpg)")
         self.numstr3.setFlat(True)
         self.numstr3.setObjectName("numstr3")
         self.choosedif = QtWidgets.QLabel(self.centralwidget)
         self.choosedif.setGeometry(QtCore.QRect(400, 280, 281, 51))
         font.setPointSize(20)
         self.choosedif.setFont(font)
-        #self.choosedif.setStyleSheet("background-image: url(:/bck/yellow.jpg);")
         self.choosedif.setObjectName("choosedif")
         self.difftext = QtWidgets.QLabel(self.centralwidget)
         self.difftext.setGeometry(QtCore.QRect(360, 410, 341, 101))
         font.setPointSize(12)
         self.difftext.setFont(font)
-        #self.difftext.setStyleSheet("background-image: url(:/bck/yellow.jpg);")
         self.difftext.setObjectName("difftext")
         self.trystat = QtWidgets.QLabel(self.centralwidget)
         self.trystat.setGeometry(QtCore.QRect(870, 10, 171, 31))
@@ -365,11 +363,12 @@ class Ui_MainWindow(object):
             word1 = list(words_list[random_num].upper())
             word = ''.join(word1)
         for i in range(len(word1)):
-            correct_ones.append('_ ')
+            correct_ones.append('_ ') #список букв слова из черточек
         lines = ''.join(correct_ones)
         _translate = QtCore.QCoreApplication.translate
         self.wordstat.setText(_translate("MainWindow", lines))
 
+        '''действия'''
         self.retranslateUi(MainWindow)
         self.numstr1.clicked.connect(self.numstr1.hide)
         self.numstr1.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 1))
@@ -380,7 +379,7 @@ class Ui_MainWindow(object):
         self.tryletter.clicked.connect(self.tryletter.hide)
         self.tryletter.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 2))
         self.help5050.clicked.connect(self.help5050.hide)
-        self.help5050.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 13))
+        self.help5050.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 3))
         self.easybtn.clicked.connect(self.choosedif.hide)
         self.easybtn.clicked.connect(lambda: self.rename("сложность:\n" + self.easybtn.text()))
         self.easybtn.clicked.connect(lambda: self.lifes("попыток: 10"))
@@ -479,12 +478,7 @@ class Ui_MainWindow(object):
         self.normbtn.clicked.connect(self.hidedown.hide)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    '''спавн попыток'''
-    def lifes(self, text):
-        _translate = QtCore.QCoreApplication.translate
-        self.trystat.setText(_translate("MainWindow", text))
-
-    '''спавн текстов виджетов и кнопок'''
+    '''обновление надписей текстов виджетов и кнопок'''
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         self.help5050.setText(_translate("MainWindow", "гл|согл"))
@@ -494,7 +488,9 @@ class Ui_MainWindow(object):
         self.numstr2.setText(_translate("MainWindow", "номер строки"))
         self.numstr3.setText(_translate("MainWindow", "номер строки"))
         self.choosedif.setText(_translate("MainWindow", "Выбери сложность:"))
-        self.difftext.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">*легкая - все подсказки</p><p align=\"center\">*нормальная - 3 подсказки по строке</p><p align=\"center\">*сложная - без подсказок, меньше жизней</p></body></html>"))
+        self.difftext.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">*легкая - все подсказки</p>"
+                                                       "<p align=\"center\">*нормальная - 3 подсказки по строке</p>"
+                                                       "<p align=\"center\">*сложная - без подсказок, меньше жизней</p></body></html>"))
         self.easybtn.setText(_translate("MainWindow", "легкая"))
         self.normbtn.setText(_translate("MainWindow", "нормальная"))
         self.hardbtn.setText(_translate("MainWindow", "сложная"))
@@ -533,9 +529,12 @@ class Ui_MainWindow(object):
         self.YUbtn.setText(_translate("MainWindow", "Ю"))
         self.diffstat.setText(_translate("MainWindow", "сложность:"))
 
-        '''сама игра'''
+    '''обновление надписи попыток'''
+    def lifes(self, text):
+        _translate = QtCore.QCoreApplication.translate
+        self.trystat.setText(_translate("MainWindow", text))
 
-    '''спавн сложности'''
+    '''обновление надписи сложности'''
     def rename(self, level):
         _translate = QtCore.QCoreApplication.translate
         self.diffstat.setText(_translate("MainWindow", level))
@@ -545,7 +544,8 @@ class Ui_MainWindow(object):
         missed_letters = []
         alph = {'А': 1, 'Б': 2, 'В': 3, 'Г': 4, 'Д': 5, 'Е': 6, 'Ё': 7, 'Ж':8, 'З': 9, 'И': 10, 'Й': 11,
                 'К': 12, 'Л': 13, 'М': 14, 'Н': 15, 'О': 16, 'П': 17, 'Р': 18, 'С': 19, 'Т': 20, 'У': 21, 'Ф': 22,
-                'Х': 23, 'Ц': 24, 'Ч': 25, 'Ш': 26, 'Щ': 27, 'Ъ': 28, 'Ы': 29, 'Ь':30, 'Э': 31, 'Ю': 32, 'Я': 33}
+                'Х': 23, 'Ц': 24, 'Ч': 25, 'Ш': 26, 'Щ': 27, 'Ъ': 28, 'Ы': 29, 'Ь':30, 'Э': 31, 'Ю': 32, 'Я': 33
+                }
         v = ['У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю', 'Ё']
         for a in range(len(word)):
             if word[a] != letters.replace(' ', '')[a]:
@@ -563,7 +563,7 @@ class Ui_MainWindow(object):
                 line = '2 ряд'
             if 22 < alph[guess_letter] < 34:
                 line = '3 ряд'
-            if numb_of_help == 13:
+            if numb_of_help == 3:
                 if guess_letter in v:
                     line += ', гласная'
                 else:
@@ -580,12 +580,12 @@ class Ui_MainWindow(object):
         else:
             sys.exit(0)
 
-    '''спавн нужной картинки'''
+    '''обновление нужной картинки'''
     def picture(self, life):
         name = str(life) + 'try.png'
         self.label_2.setPixmap(QtGui.QPixmap(name))
 
-    '''проверка по буковкам'''
+    '''сама игра'''
     def play(self, letter, word, correct_ones):
         e = int(self.trystat.text().split()[1]) #число жизней
         diff = self.diffstat.text().split('\n')[1] #сложность
