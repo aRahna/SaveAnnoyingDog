@@ -1,5 +1,4 @@
 import random
-
 def play_game():
     with open('слова.txt', 'r', encoding='UTF-8') as f:
         words_list = f.read().split('\n')
