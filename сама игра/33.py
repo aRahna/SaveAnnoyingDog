@@ -26,6 +26,13 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
         '''настройки спец штук'''
+        self.word = QtWidgets.QLabel(self.centralwidget)
+        self.word.setGeometry(QtCore.QRect(1, 1, 1, 1))
+        font.setPointSize(1)
+        self.word.setFont(font)
+        self.word.setAlignment(QtCore.Qt.AlignCenter)
+        self.word.setObjectName("word")
+
         self.wordstat = QtWidgets.QLabel(self.centralwidget)
         self.wordstat.setGeometry(QtCore.QRect(245, 170, 600, 70))
         font.setPointSize(20)
@@ -283,7 +290,7 @@ class Ui_MainWindow(object):
         self.YUbtn.setFlat(True)
         self.YUbtn.setObjectName("YUbtn")
         self.diffstat = QtWidgets.QLabel(self.centralwidget)
-        self.diffstat.setGeometry(QtCore.QRect(30, 10, 191, 101))
+        self.diffstat.setGeometry(QtCore.QRect(870, 60, 171, 91))
         font.setPointSize(20)
         self.diffstat.setFont(font)
         self.diffstat.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignLeft)
@@ -300,9 +307,42 @@ class Ui_MainWindow(object):
         self.backgrlabel.setGeometry(QtCore.QRect(0, 0, 1081, 801))
         self.backgrlabel.setPixmap(QtGui.QPixmap("bck1.jpg"))
         self.backgrlabel.setObjectName("backgrlabel")
+        self.quiiit = QtWidgets.QPushButton(self.centralwidget)
+        self.quiiit.setGeometry(QtCore.QRect(50, 10, 121, 41))
+        self.quiiit.setFont(font)
+        self.quiiit.setFlat(True)
+        self.quiiit.setObjectName("quiiit")
+        self.agaiiin = QtWidgets.QPushButton(self.centralwidget)
+        self.agaiiin.setGeometry(QtCore.QRect(60, 60, 121, 41))
+        self.agaiiin.setFont(font)
+        self.agaiiin.setFlat(True)
+        self.agaiiin.setObjectName("agaiiin")
+        self.bcklang = QtWidgets.QLabel(self.centralwidget)
+        self.bcklang.setGeometry(QtCore.QRect(0, 0, 1081, 801))
+        self.bcklang.setPixmap(QtGui.QPixmap("bck1.jpg"))
+        self.bcklang.setObjectName("bcklang")
+        self.chooselang = QtWidgets.QLabel(self.centralwidget)
+        self.chooselang.setGeometry(QtCore.QRect(390, 180, 281, 41))
+        self.chooselang.setFont(font)
+        self.chooselang.setObjectName("chooselang")
+        self.rus = QtWidgets.QPushButton(self.centralwidget)
+        self.rus.setGeometry(QtCore.QRect(340, 260, 131, 51))
+        font.setPointSize(15)
+        font.setBold(True)
+        self.rus.setFont(font)
+        self.rus.setFlat(True)
+        self.rus.setObjectName("rus")
+        self.eng = QtWidgets.QPushButton(self.centralwidget)
+        self.eng.setGeometry(QtCore.QRect(590, 260, 131, 51))
+        self.eng.setFont(font)
+        self.eng.setFlat(True)
+        self.eng.setObjectName("eng")
 
         '''спавн всего'''
+        self.word.raise_()
         self.backgrlabel.raise_()
+        self.quiiit.raise_()
+        self.agaiiin.raise_()
         self.wordstat.raise_()
         self.help5050.raise_()
         self.helps.raise_()
@@ -353,33 +393,26 @@ class Ui_MainWindow(object):
         self.choosedif.raise_()
         self.hardbtn.raise_()
         self.easybtn.raise_()
+        self.bcklang.raise_()
+        self.chooselang.raise_()
+        self.rus.raise_()
+        self.eng.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
-        '''создание слова'''
-        with open('слова.txt', 'r', encoding='UTF-8') as f:
-            correct_ones = []
-            words_list = f.read().split('\n')
-            random_num = random.randint(0, (len(words_list) - 1))
-            word1 = list(words_list[random_num].upper())
-            word = ''.join(word1)
-        for i in range(len(word1)):
-            correct_ones.append('_ ') #список букв слова из черточек
-        lines = ''.join(correct_ones)
-        _translate = QtCore.QCoreApplication.translate
-        self.wordstat.setText(_translate("MainWindow", lines))
+
 
         '''действия'''
         self.retranslateUi(MainWindow)
         self.numstr1.clicked.connect(self.numstr1.hide)
-        self.numstr1.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 1))
+        self.numstr1.clicked.connect(lambda: self.help(self.word.text().upper(), self.wordstat.text(), 1))
         self.numstr2.clicked.connect(self.numstr2.hide)
-        self.numstr2.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 1))
+        self.numstr2.clicked.connect(lambda: self.help(self.word.text().upper(), self.wordstat.text(), 1))
         self.numstr3.clicked.connect(self.numstr3.hide)
-        self.numstr3.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 1))
+        self.numstr3.clicked.connect(lambda: self.help(self.word.text().upper(), self.wordstat.text(), 1))
         self.tryletter.clicked.connect(self.tryletter.hide)
-        self.tryletter.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 2))
+        self.tryletter.clicked.connect(lambda: self.help(self.word.text().upper(), self.wordstat.text(), 2))
         self.help5050.clicked.connect(self.help5050.hide)
-        self.help5050.clicked.connect(lambda: self.help(word1, self.wordstat.text(), 3))
+        self.help5050.clicked.connect(lambda: self.help(self.word.text().upper(), self.wordstat.text(), 3))
         self.easybtn.clicked.connect(self.choosedif.hide)
         self.easybtn.clicked.connect(lambda: self.rename("сложность:\n" + self.easybtn.text()))
         self.easybtn.clicked.connect(lambda: self.lifes("попыток: 10"))
@@ -404,79 +437,144 @@ class Ui_MainWindow(object):
         self.easybtn.clicked.connect(self.label.hide)
         self.normbtn.clicked.connect(self.label.hide)
         self.hardbtn.clicked.connect(self.label.hide)
+        self.quiiit.clicked.connect(lambda: sys.exit(0))
+        self.agaiiin.clicked.connect(lambda: self.setupUi(MainWindow))
         '''буковки'''
         self.Abtn.clicked.connect(self.Abtn.hide)
-        self.Abtn.clicked.connect(lambda: self.play(self.Abtn.text(), word, correct_ones))
+        self.Abtn.clicked.connect(lambda: self.play(self.Abtn.text(), self.word.text(), self.wordstat.text()))
         self.Bbtn.clicked.connect(self.Bbtn.hide)
-        self.Bbtn.clicked.connect(lambda: self.play(self.Bbtn.text(), word, correct_ones))
+        self.Bbtn.clicked.connect(lambda: self.play(self.Bbtn.text(), self.word.text(), self.wordstat.text()))
         self.Vbtn.clicked.connect(self.Vbtn.hide)
-        self.Vbtn.clicked.connect(lambda: self.play(self.Vbtn.text(), word, correct_ones))
+        self.Vbtn.clicked.connect(lambda: self.play(self.Vbtn.text(), self.word.text(), self.wordstat.text()))
         self.Gbtn.clicked.connect(self.Gbtn.hide)
-        self.Gbtn.clicked.connect(lambda: self.play(self.Gbtn.text(), word, correct_ones))
+        self.Gbtn.clicked.connect(lambda: self.play(self.Gbtn.text(), self.word.text(), self.wordstat.text()))
         self.Dbtn.clicked.connect(self.Dbtn.hide)
-        self.Dbtn.clicked.connect(lambda: self.play(self.Dbtn.text(), word, correct_ones))
+        self.Dbtn.clicked.connect(lambda: self.play(self.Dbtn.text(), self.word.text(), self.wordstat.text()))
         self.Ebtn.clicked.connect(self.Ebtn.hide)
-        self.Ebtn.clicked.connect(lambda: self.play(self.Ebtn.text(), word, correct_ones))
+        self.Ebtn.clicked.connect(lambda: self.play(self.Ebtn.text(), self.word.text(), self.wordstat.text()))
         self.EObtn.clicked.connect(self.EObtn.hide)
-        self.EObtn.clicked.connect(lambda: self.play(self.EObtn.text(), word, correct_ones))
+        self.EObtn.clicked.connect(lambda: self.play(self.EObtn.text(), self.word.text(), self.wordstat.text()))
         self.ZHbtn.clicked.connect(self.ZHbtn.hide)
-        self.ZHbtn.clicked.connect(lambda: self.play(self.ZHbtn.text(), word, correct_ones))
+        self.ZHbtn.clicked.connect(lambda: self.play(self.ZHbtn.text(), self.word.text(), self.wordstat.text()))
         self.Zbtn.clicked.connect(self.Zbtn.hide)
-        self.Zbtn.clicked.connect(lambda: self.play(self.Zbtn.text(), word, correct_ones))
+        self.Zbtn.clicked.connect(lambda: self.play(self.Zbtn.text(), self.word.text(), self.wordstat.text()))
         self.Ibtn.clicked.connect(self.Ibtn.hide)
-        self.Ibtn.clicked.connect(lambda: self.play(self.Ibtn.text(), word, correct_ones))
+        self.Ibtn.clicked.connect(lambda: self.play(self.Ibtn.text(), self.word.text(), self.wordstat.text()))
         self.Jbtn.clicked.connect(self.Jbtn.hide)
-        self.Jbtn.clicked.connect(lambda: self.play(self.Jbtn.text(), word, correct_ones))
+        self.Jbtn.clicked.connect(lambda: self.play(self.Jbtn.text(), self.word.text(), self.wordstat.text()))
         self.Kbtn.clicked.connect(self.Kbtn.hide)
-        self.Kbtn.clicked.connect(lambda: self.play(self.Kbtn.text(), word, correct_ones))
+        self.Kbtn.clicked.connect(lambda: self.play(self.Kbtn.text(), self.word.text(), self.wordstat.text()))
         self.Lbtn.clicked.connect(self.Lbtn.hide)
-        self.Lbtn.clicked.connect(lambda: self.play(self.Lbtn.text(), word, correct_ones))
+        self.Lbtn.clicked.connect(lambda: self.play(self.Lbtn.text(), self.word.text(), self.wordstat.text()))
         self.Mbtn.clicked.connect(self.Mbtn.hide)
-        self.Mbtn.clicked.connect(lambda: self.play(self.Mbtn.text(), word, correct_ones))
+        self.Mbtn.clicked.connect(lambda: self.play(self.Mbtn.text(), self.word.text(), self.wordstat.text()))
         self.Nbtn.clicked.connect(self.Nbtn.hide)
-        self.Nbtn.clicked.connect(lambda: self.play(self.Nbtn.text(), word, correct_ones))
+        self.Nbtn.clicked.connect(lambda: self.play(self.Nbtn.text(), self.word.text(), self.wordstat.text()))
         self.Obtn.clicked.connect(self.Obtn.hide)
-        self.Obtn.clicked.connect(lambda: self.play(self.Obtn.text(), word, correct_ones))
+        self.Obtn.clicked.connect(lambda: self.play(self.Obtn.text(), self.word.text(), self.wordstat.text()))
         self.Pbtn.clicked.connect(self.Pbtn.hide)
-        self.Pbtn.clicked.connect(lambda: self.play(self.Pbtn.text(), word, correct_ones))
+        self.Pbtn.clicked.connect(lambda: self.play(self.Pbtn.text(), self.word.text(), self.wordstat.text()))
         self.Rbtn.clicked.connect(self.Rbtn.hide)
-        self.Rbtn.clicked.connect(lambda: self.play(self.Rbtn.text(), word, correct_ones))
+        self.Rbtn.clicked.connect(lambda: self.play(self.Rbtn.text(), self.word.text(), self.wordstat.text()))
         self.Sbtn.clicked.connect(self.Sbtn.hide)
-        self.Sbtn.clicked.connect(lambda: self.play(self.Sbtn.text(), word, correct_ones))
+        self.Sbtn.clicked.connect(lambda: self.play(self.Sbtn.text(), self.word.text(), self.wordstat.text()))
         self.Tbtn.clicked.connect(self.Tbtn.hide)
-        self.Tbtn.clicked.connect(lambda: self.play(self.Tbtn.text(), word, correct_ones))
+        self.Tbtn.clicked.connect(lambda: self.play(self.Tbtn.text(), self.word.text(), self.wordstat.text()))
         self.Ubtn.clicked.connect(self.Ubtn.hide)
-        self.Ubtn.clicked.connect(lambda: self.play(self.Ubtn.text(), word, correct_ones))
+        self.Ubtn.clicked.connect(lambda: self.play(self.Ubtn.text(), self.word.text(), self.wordstat.text()))
         self.Fbtn.clicked.connect(self.Fbtn.hide)
-        self.Fbtn.clicked.connect(lambda: self.play(self.Fbtn.text(), word, correct_ones))
+        self.Fbtn.clicked.connect(lambda: self.play(self.Fbtn.text(), self.word.text(), self.wordstat.text()))
         self.Hbtn.clicked.connect(self.Hbtn.hide)
-        self.Hbtn.clicked.connect(lambda: self.play(self.Hbtn.text(), word, correct_ones))
+        self.Hbtn.clicked.connect(lambda: self.play(self.Hbtn.text(), self.word.text(), self.wordstat.text()))
         self.Cbtn.clicked.connect(self.Cbtn.hide)
-        self.Cbtn.clicked.connect(lambda: self.play(self.Cbtn.text(), word, correct_ones))
+        self.Cbtn.clicked.connect(lambda: self.play(self.Cbtn.text(), self.word.text(), self.wordstat.text()))
         self.CHbtn.clicked.connect(self.CHbtn.hide)
-        self.CHbtn.clicked.connect(lambda: self.play(self.CHbtn.text(), word, correct_ones))
+        self.CHbtn.clicked.connect(lambda: self.play(self.CHbtn.text(), self.word.text(), self.wordstat.text()))
         self.SHbtn.clicked.connect(self.SHbtn.hide)
-        self.SHbtn.clicked.connect(lambda: self.play(self.SHbtn.text(), word, correct_ones))
+        self.SHbtn.clicked.connect(lambda: self.play(self.SHbtn.text(), self.word.text(), self.wordstat.text()))
         self.SCHbtn.clicked.connect(self.SCHbtn.hide)
-        self.SCHbtn.clicked.connect(lambda: self.play(self.SCHbtn.text(), word, correct_ones))
+        self.SCHbtn.clicked.connect(lambda: self.play(self.SCHbtn.text(), self.word.text(), self.wordstat.text()))
         self.TVERDbtn.clicked.connect(self.TVERDbtn.hide)
-        self.TVERDbtn.clicked.connect(lambda: self.play(self.TVERDbtn.text(), word, correct_ones))
+        self.TVERDbtn.clicked.connect(lambda: self.play(self.TVERDbtn.text(), self.word.text(), self.wordstat.text()))
         self.YYbtn.clicked.connect(self.YYbtn.hide)
-        self.YYbtn.clicked.connect(lambda: self.play(self.YYbtn.text(), word, correct_ones))
+        self.YYbtn.clicked.connect(lambda: self.play(self.YYbtn.text(), self.word.text(), self.wordstat.text()))
         self.MYAGKbtn.clicked.connect(self.MYAGKbtn.hide)
-        self.MYAGKbtn.clicked.connect(lambda: self.play(self.MYAGKbtn.text(), word, correct_ones))
+        self.MYAGKbtn.clicked.connect(lambda: self.play(self.MYAGKbtn.text(), self.word.text(), self.wordstat.text()))
         self.AEbtn.clicked.connect(self.AEbtn.hide)
-        self.AEbtn.clicked.connect(lambda: self.play(self.AEbtn.text(), word, correct_ones))
+        self.AEbtn.clicked.connect(lambda: self.play(self.AEbtn.text(), self.word.text(), self.wordstat.text()))
         self.YUbtn.clicked.connect(self.YUbtn.hide)
-        self.YUbtn.clicked.connect(lambda: self.play(self.YUbtn.text(), word, correct_ones))
+        self.YUbtn.clicked.connect(lambda: self.play(self.YUbtn.text(), self.word.text(), self.wordstat.text()))
         self.YAbtn.clicked.connect(self.YAbtn.hide)
-        self.YAbtn.clicked.connect(lambda: self.play(self.YAbtn.text(), word, correct_ones))
+        self.YAbtn.clicked.connect(lambda: self.play(self.YAbtn.text(), self.word.text(), self.wordstat.text()))
         '''другое'''
         self.normbtn.clicked.connect(self.tryletter.hide)
         self.normbtn.clicked.connect(self.help5050.hide)
         self.easybtn.clicked.connect(self.hidedown.hide)
         self.normbtn.clicked.connect(self.hidedown.hide)
+        self.rus.clicked.connect(self.bcklang.hide)
+        self.rus.clicked.connect(self.chooselang.hide)
+        self.eng.clicked.connect(self.chooselang.hide)
+        self.eng.clicked.connect(self.rus.hide)
+        self.eng.clicked.connect(self.bcklang.hide)
+        self.eng.clicked.connect(self.eng.hide)
+        self.rus.clicked.connect(self.rus.hide)
+        self.rus.clicked.connect(lambda: self.create_word('слова.txt'))
+        self.rus.clicked.connect(self.eng.hide)
+        self.eng.clicked.connect(self.Abtn.hide)
+        self.eng.clicked.connect(self.Kbtn.hide)
+        self.eng.clicked.connect(self.Hbtn.hide)
+        self.eng.clicked.connect(self.Jbtn.hide)
+        self.eng.clicked.connect(self.Fbtn.hide)
+        self.eng.clicked.connect(self.YAbtn.hide)
+        self.eng.clicked.connect(self.YUbtn.hide)
+        self.eng.clicked.connect(lambda: self.language())
+        self.eng.clicked.connect(lambda: self.create_word('words.txt'))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    '''создание слова'''
+    def create_word(self, text):
+        with open(text, 'r', encoding='UTF-8') as f:
+            correct_ones = []
+            words_list = f.read().split('\n')
+            random_num = random.randint(0, (len(words_list) - 1))
+            word1 = list(words_list[random_num].upper())
+            word = ' '.join(word1)
+        for i in range(len(word1)):
+            correct_ones.append('_')  # список букв слова из черточек
+        lines = ' '.join(correct_ones)
+        _translate = QtCore.QCoreApplication.translate
+        self.wordstat.setText(_translate("MainWindow", lines))
+        self.word.setText(_translate("MainWindow", word))
+
+    '''смена языка'''
+    def language(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.AEbtn.setText(_translate("MainWindow", "Z"))
+        self.SHbtn.setText(_translate("MainWindow", "U"))
+        self.TVERDbtn.setText(_translate("MainWindow", "W"))
+        self.MYAGKbtn.setText(_translate("MainWindow", "Y"))
+        self.Cbtn.setText(_translate("MainWindow", "S"))
+        self.CHbtn.setText(_translate("MainWindow", "T"))
+        self.YYbtn.setText(_translate("MainWindow", "X"))
+        self.Bbtn.setText(_translate("MainWindow", "A"))
+        self.Vbtn.setText(_translate("MainWindow", "B"))
+        self.Gbtn.setText(_translate("MainWindow", "C"))
+        self.Dbtn.setText(_translate("MainWindow", "D"))
+        self.Ebtn.setText(_translate("MainWindow", "E"))
+        self.EObtn.setText(_translate("MainWindow", "F"))
+        self.ZHbtn.setText(_translate("MainWindow", "G"))
+        self.Zbtn.setText(_translate("MainWindow", "H"))
+        self.Ibtn.setText(_translate("MainWindow", "I"))
+        self.Lbtn.setText(_translate("MainWindow", "J"))
+        self.Mbtn.setText(_translate("MainWindow", "K"))
+        self.Obtn.setText(_translate("MainWindow", "M"))
+        self.Rbtn.setText(_translate("MainWindow", "O"))
+        self.Tbtn.setText(_translate("MainWindow", "Q"))
+        self.Nbtn.setText(_translate("MainWindow", "L"))
+        self.Pbtn.setText(_translate("MainWindow", "N"))
+        self.Sbtn.setText(_translate("MainWindow", "P"))
+        self.Ubtn.setText(_translate("MainWindow", "R"))
+        self.SCHbtn.setText(_translate("MainWindow", "V"))
 
     '''обновление надписей текстов виджетов и кнопок'''
     def retranslateUi(self, MainWindow):
@@ -527,7 +625,11 @@ class Ui_MainWindow(object):
         self.TVERDbtn.setText(_translate("MainWindow", "Ъ"))
         self.MYAGKbtn.setText(_translate("MainWindow", "Ь"))
         self.YUbtn.setText(_translate("MainWindow", "Ю"))
-        self.diffstat.setText(_translate("MainWindow", "сложность:"))
+        self.quiiit.setText(_translate("MainWindow", "Выйти"))
+        self.agaiiin.setText(_translate("MainWindow", "Заново"))
+        self.chooselang.setText(_translate("MainWindow", "Выберите язык слов:"))
+        self.rus.setText(_translate("MainWindow", "РУССКИЙ"))
+        self.eng.setText(_translate("MainWindow", "ENGLISH"))
 
     '''обновление надписи попыток'''
     def lifes(self, text):
@@ -541,13 +643,19 @@ class Ui_MainWindow(object):
 
     '''кнопочки помощь'''
     def help(self, word, letters, numb_of_help):
+        word = word.replace(' ', '')
         missed_letters = []
-        alph = {'А': 1, 'Б': 2, 'В': 3, 'Г': 4, 'Д': 5, 'Е': 6, 'Ё': 7, 'Ж':8, 'З': 9, 'И': 10, 'Й': 11,
+        rus_alph = {'А': 1, 'Б': 2, 'В': 3, 'Г': 4, 'Д': 5, 'Е': 6, 'Ё': 7, 'Ж':8, 'З': 9, 'И': 10, 'Й': 11,
                 'К': 12, 'Л': 13, 'М': 14, 'Н': 15, 'О': 16, 'П': 17, 'Р': 18, 'С': 19, 'Т': 20, 'У': 21, 'Ф': 22,
                 'Х': 23, 'Ц': 24, 'Ч': 25, 'Ш': 26, 'Щ': 27, 'Ъ': 28, 'Ы': 29, 'Ь':30, 'Э': 31, 'Ю': 32, 'Я': 33
-                }
-        v = ['У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю', 'Ё']
+        }
+        eng_alph = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I':9,
+                    'J': 10, 'K': 11, 'L': 12, 'M': 13, 'N': 14, 'O': 15, 'P': 16, 'Q': 17, 'R': 18,
+                    'S': 19, 'T': 20, 'U': 21, 'V': 22, 'W': 23, 'X': 24, 'Y': 25, 'Z': 26
+        }
+        v = ['У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю', 'Ё', 'A', 'E', 'I', 'O', 'U']
         for a in range(len(word)):
+            print(word, letters)
             if word[a] != letters.replace(' ', '')[a]:
                 missed_letters.append(word[a])
         rand_num = random.randint(0, (len(missed_letters) - 1))
@@ -556,23 +664,35 @@ class Ui_MainWindow(object):
         if numb_of_help == 2:
             e = int(self.trystat.text().split()[1]) - 1
             self.trystat.setText("попыток: " + str(e))
+            self.picture(e)
         else:
-            if 0 < alph[guess_letter] < 12:
-                line = '1 ряд'
-            if 11 < alph[guess_letter] < 23:
-                line = '2 ряд'
-            if 22 < alph[guess_letter] < 34:
-                line = '3 ряд'
+            if guess_letter in rus_alph.keys():
+                if 0 < rus_alph[guess_letter] < 12:
+                    line = '1 ряд'
+                if 11 < rus_alph[guess_letter] < 23:
+                    line = '2 ряд'
+                if 22 < rus_alph[guess_letter] < 34:
+                    line = '3 ряд'
+            else:
+                if 0 < eng_alph[guess_letter] < 10:
+                    line = '1 ряд'
+                if 9 < eng_alph[guess_letter] < 19:
+                    line = '2 ряд'
+                if 18 < eng_alph[guess_letter] < 27:
+                    line = '3 ряд'
             if numb_of_help == 3:
                 if guess_letter in v:
                     line += ', гласная'
                 else:
-                    line += ', согласная,\nвключая ЬЪ'
+                    if guess_letter in eng_alph.keys():
+                        line += ', согласная,\nвключая Y'
+                    else:
+                        line += ', согласная,\nвключая ЬЪ'
         QMessageBox.information(None, "Help", 'Подсказка: ' + line, buttons=QMessageBox.Ok)
 
     '''окошко "продолжим игру?"'''
     def continue_game(self):
-        result = QMessageBox.information(None, "The End", 'Игра окончена!\nПродолжим?',
+        result = QMessageBox.information(None, "The End", 'Игра окончена!\nЗаново?',
                                          buttons=QMessageBox.Ok | QMessageBox.No,
                                          defaultButton=QMessageBox.Ok)
         if result == 1024:
@@ -587,6 +707,8 @@ class Ui_MainWindow(object):
 
     '''сама игра'''
     def play(self, letter, word, correct_ones):
+        word = word.replace(' ', '')
+        correct_ones = correct_ones.split(' ')
         e = int(self.trystat.text().split()[1]) #число жизней
         diff = self.diffstat.text().split('\n')[1] #сложность
         _translate = QtCore.QCoreApplication.translate
@@ -598,9 +720,9 @@ class Ui_MainWindow(object):
                         index_list.append(i)
                 for i in index_list:
                     correct_ones[i] = letter.upper()
-                t = "".join(correct_ones)
+                t = " ".join(correct_ones)
                 self.wordstat.setText(t)
-                if t.upper() == word:
+                if t.upper().replace(' ', '') == word:
                     st = "cлово " + t + ".\nУра! Собачка спасена!"
                     self.wordstat.setText(_translate("MainWindow", st))
                     self.continue_game()
