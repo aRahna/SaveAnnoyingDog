@@ -655,7 +655,6 @@ class Ui_MainWindow(object):
         }
         v = ['У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю', 'Ё', 'A', 'E', 'I', 'O', 'U']
         for a in range(len(word)):
-            print(word, letters)
             if word[a] != letters.replace(' ', '')[a]:
                 missed_letters.append(word[a])
         rand_num = random.randint(0, (len(missed_letters) - 1))
@@ -722,8 +721,8 @@ class Ui_MainWindow(object):
                     correct_ones[i] = letter.upper()
                 t = " ".join(correct_ones)
                 self.wordstat.setText(t)
-                if t.replace(' ','') == word:
-                    st = "cлово " + t.replace(' ','') + ".\nУра! Собачка спасена!"
+                if t.replace(' ', '') == word:
+                    st = "cлово " + t.replace(' ', '') + ".\nУра! Собачка спасена!"
                     self.wordstat.setText(_translate("MainWindow", st))
                     self.continue_game()
             else:
