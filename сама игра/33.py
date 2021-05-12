@@ -722,8 +722,8 @@ class Ui_MainWindow(object):
                     correct_ones[i] = letter.upper()
                 t = " ".join(correct_ones)
                 self.wordstat.setText(t)
-                if t.upper().replace(' ', '') == word:
-                    st = "cлово " + t + ".\nУра! Собачка спасена!"
+                if t.replace(' ','') == word:
+                    st = "cлово " + t.replace(' ','') + ".\nУра! Собачка спасена!"
                     self.wordstat.setText(_translate("MainWindow", st))
                     self.continue_game()
             else:
