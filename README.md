@@ -1,7 +1,7 @@
 # SaveAnnoyingDog
 ![Doge](https://psv4.userapi.com/c520036/u152272684/docs/d14/ea10dff0e8e2/gif_help.gif?extra=hguw0q-_f03w17eeZ0hMEnJQ0umx16DMI6HlY_0hfoNS6zvp5AnlNCZy3n7VZjNpau9XsFpKSM67xBkZe9alVJzdpiWIcjIjI0ierlDUCqJd9a2F7JNmAh0S0ZssbqD4fcnokhcHsvXn2MDOBaIc2Q)
 ### Описание
-Игра по мотивам классической "виселицы". Цель - угадать слово по буквам, но количество попыток ограничено.
+Игра по мотивам классической "виселицы". Цель - угадать* слово по буквам, но количество попыток ограничено.
 ***
 ### Что хотелось бы реализовать
 - Большой список доступных слов (из-за этого, правда, деление слов по темам весьма затруднительно).
