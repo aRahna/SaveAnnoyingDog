@@ -545,6 +545,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         self.wordstat.setText(_translate("MainWindow", lines))
         self.word.setText(_translate("MainWindow", word))
+        print(word)
 
     '''смена языка'''
     def language(self):
