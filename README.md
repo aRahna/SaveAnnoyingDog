@@ -1,5 +1,5 @@
 # SaveAnnoyingDog
-![Doge](https://psv4.userapi.com/c520036/u152272684/docs/d14/e08f1b3ed3fb/gif_help.gif?extra=0a-Yp01V4IMGbIpb2WfQ8mT7xwpZesI0W_yR68eAZC9KH3fuw65nqrbsevLxCHInWiRKqMJTGzGzfXxYMpqRqFDMXtpdCup3_SycEg48Kaa3Et277Xo2k1CYA3G5LeBmiIsNivZ94OciVrvYlH-Oiw-1)
+![Doge](https://raw.githubusercontent.com/aRahna/SaveAnnoyingDog/main/gif_help.gif)
 ### Описание
 Игра по мотивам классической "виселицы". Цель - угадать* слово по буквам, но количество попыток ограничено.
 ***
